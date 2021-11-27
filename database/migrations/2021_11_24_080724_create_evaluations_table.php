@@ -16,7 +16,7 @@ class CreateEvaluationsTable extends Migration
         Schema::create('evaluations', function (Blueprint $table) {
             $table->id();
             $table->uuid('company');
-            $table->text('commets');
+            $table->text('comment');
             $table->integer('stars');
             $table->timestamps();
         });

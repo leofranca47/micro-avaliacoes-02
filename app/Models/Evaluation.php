@@ -11,7 +11,7 @@ class Evaluation extends Model
 
     protected $fillable = [
         "company",
-        "commets",
+        "comment",
         "stars"
     ];
 }
