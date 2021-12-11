@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEvaluation;
 use App\Http\Resources\EvaluationResource;
+use App\Jobs\EvaluationCreated;
 use App\Models\Evaluation;
 use App\Services\CompanyService;
 
@@ -50,6 +51,9 @@ class EvaluationController extends Controller
             "comment" => $request->get('comment'),
             "stars" => $request->get('stars')
         ]);
+
+        $company = json_decode($response->body())->data;
+        EvaluationCreated::dispatch($company->email)->onQueue('queue_email');
 
         return new EvaluationResource($evaluation);
     }
